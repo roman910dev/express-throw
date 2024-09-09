@@ -11,11 +11,11 @@
 	},
 	"scripts": {
 		"dev": "tsup --watch",
-		"build": "tsup",
+		"build-raw": "tsup",
 		"lint": "eslint . --ext .ts",
 		"format": "prettier --write .",
 		"generate": "tsx scripts/generate-statuses.ts",
-		"prepublish": "pnpm generate && pnpm format && pnpm lint && pnpm build",
+		"build": "pnpm generate && pnpm format && pnpm lint && pnpm build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
