@@ -1,6 +1,6 @@
 {
 	"name": "express-throw",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "",
 	"exports": {
 		".": {
@@ -15,7 +15,7 @@
 		"lint": "eslint . --ext .ts",
 		"format": "prettier --write .",
 		"generate": "tsx scripts/generate-statuses.ts",
-		"build": "pnpm generate && pnpm format && pnpm lint && pnpm build",
+		"build": "pnpm generate && pnpm format && pnpm lint && pnpm build-raw",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
@@ -42,5 +42,13 @@
 		"tsup": "^8.2.4",
 		"tsx": "^4.19.0",
 		"typescript": "^5.5.4"
+	},
+	"pnpm": {
+		"ignoredBuiltDependencies": [
+			"esbuild"
+		],
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	}
 }

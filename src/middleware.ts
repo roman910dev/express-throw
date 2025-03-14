@@ -8,6 +8,6 @@ export default function expressThrow(
 	res: Response,
 	next: NextFunction,
 ) {
-	if (err instanceof ExpressThrower) return err.send(res)
+	if (err instanceof ExpressThrower) return err.send(req, res)
 	next(err)
 }

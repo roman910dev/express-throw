@@ -46,7 +46,7 @@ var express_thrower_default = ExpressThrower;
 
 // src/middleware.ts
 function expressThrow(err, req, res, next) {
-  if (err instanceof express_thrower_default) return err.send(res);
+  if (err instanceof express_thrower_default) return err.send(req, res);
   next(err);
 }
 
