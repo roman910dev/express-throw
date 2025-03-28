@@ -12,8 +12,8 @@ function generateStatusesTS() {
 	ParamsCallback,
 	ParamsOptions,
 	ParamsOptionsCallback,
-} from './types'
-import ExpressThrower from './express-thrower'
+} from './types.js'
+import ExpressThrower from './express-thrower.js'
 ` +
 		status.codes
 			.map(
@@ -29,7 +29,7 @@ export class ${pascalCase(status(sc))} extends ExpressThrower {
 			)
 			.join('\n')
 
-	writeFileSync(path.join(__dirname, '../src/statuses.ts'), code)
+	writeFileSync(path.join(import.meta.dirname, '../src/statuses.ts'), code)
 }
 
 function generateStatusTypeTS() {
@@ -38,7 +38,7 @@ function generateStatusTypeTS() {
 		...status.codes.map((sc) => `	| ${sc}`),
 		'',
 	].join('\n')
-	writeFileSync(path.join(__dirname, '../src/status-type.ts'), code)
+	writeFileSync(path.join(import.meta.dirname, '../src/status-type.ts'), code)
 }
 
 function main() {

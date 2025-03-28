@@ -1,18 +1,19 @@
 {
 	"name": "express-throw",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "",
+	"type": "module",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js"
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
 		}
 	},
 	"scripts": {
 		"dev": "tsup --watch",
 		"build-raw": "tsup",
-		"lint": "eslint . --ext .ts",
+		"lint": "tsc --noEmit && eslint . --ext .ts",
 		"format": "prettier --write .",
 		"generate": "tsx scripts/generate-statuses.ts",
 		"build": "pnpm generate && pnpm format && pnpm lint && pnpm build-raw",
