@@ -1,8 +1,8 @@
-import expressThrow from './middleware.js'
+import expressThrow from './middleware'
 
 export default expressThrow
-export * from './express-thrower.js'
-export * from './statuses.js'
-export * from './status-type.js'
-export * from './utils.js'
-export { Options as ExpressThrowerOptions } from './types.js'
+export * from './express-thrower'
+export * from './statuses'
+export * from './status-type'
+export * from './utils'
+export { Options as ExpressThrowerOptions } from './types'

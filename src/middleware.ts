@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express'
 
-import ExpressThrower from './express-thrower.js'
+import ExpressThrower from './express-thrower'
 
 export default function expressThrow(
 	err: Error,

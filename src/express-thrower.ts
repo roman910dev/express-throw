@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'
 import statuses from 'statuses'
 
-import type { StatusCode as SC } from './status-type.js'
+import type { StatusCode as SC } from './status-type'
 import type {
 	Callback,
 	Options,
@@ -9,7 +9,7 @@ import type {
 	ParamsFull,
 	ParamsOptions,
 	ParamsOptionsCallback,
-} from './types.js'
+} from './types'
 
 function sendOptions(res: Response, options: Options) {
 	if (options.filename) {

@@ -1,106 +1,5 @@
-"use strict";
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  Accepted: () => Accepted,
-  AlreadyReported: () => AlreadyReported,
-  BadGateway: () => BadGateway,
-  BadRequest: () => BadRequest,
-  BandwidthLimitExceeded: () => BandwidthLimitExceeded,
-  Conflict: () => Conflict,
-  Continue: () => Continue,
-  Created: () => Created,
-  EarlyHints: () => EarlyHints,
-  ExpectationFailed: () => ExpectationFailed,
-  ExpressThrower: () => ExpressThrower,
-  FailedDependency: () => FailedDependency,
-  Forbidden: () => Forbidden,
-  Found: () => Found,
-  GatewayTimeout: () => GatewayTimeout,
-  Gone: () => Gone,
-  HTTPVersionNotSupported: () => HTTPVersionNotSupported,
-  IMUsed: () => IMUsed,
-  ImaTeapot: () => ImaTeapot,
-  InsufficientStorage: () => InsufficientStorage,
-  InternalServerError: () => InternalServerError,
-  LengthRequired: () => LengthRequired,
-  Locked: () => Locked,
-  LoopDetected: () => LoopDetected,
-  MethodNotAllowed: () => MethodNotAllowed,
-  MisdirectedRequest: () => MisdirectedRequest,
-  MovedPermanently: () => MovedPermanently,
-  MultiStatus: () => MultiStatus,
-  MultipleChoices: () => MultipleChoices,
-  NetworkAuthenticationRequired: () => NetworkAuthenticationRequired,
-  NoContent: () => NoContent,
-  NonAuthoritativeInformation: () => NonAuthoritativeInformation,
-  NotAcceptable: () => NotAcceptable,
-  NotExtended: () => NotExtended,
-  NotFound: () => NotFound,
-  NotImplemented: () => NotImplemented,
-  NotModified: () => NotModified,
-  OK: () => OK,
-  PartialContent: () => PartialContent,
-  PayloadTooLarge: () => PayloadTooLarge,
-  PaymentRequired: () => PaymentRequired,
-  PermanentRedirect: () => PermanentRedirect,
-  PreconditionFailed: () => PreconditionFailed,
-  PreconditionRequired: () => PreconditionRequired,
-  Processing: () => Processing,
-  ProxyAuthenticationRequired: () => ProxyAuthenticationRequired,
-  RangeNotSatisfiable: () => RangeNotSatisfiable,
-  RequestHeaderFieldsTooLarge: () => RequestHeaderFieldsTooLarge,
-  RequestTimeout: () => RequestTimeout,
-  ResetContent: () => ResetContent,
-  SeeOther: () => SeeOther,
-  ServiceUnavailable: () => ServiceUnavailable,
-  SwitchingProtocols: () => SwitchingProtocols,
-  TemporaryRedirect: () => TemporaryRedirect,
-  TooEarly: () => TooEarly,
-  TooManyRequests: () => TooManyRequests,
-  URITooLong: () => URITooLong,
-  Unauthorized: () => Unauthorized,
-  UnavailableForLegalReasons: () => UnavailableForLegalReasons,
-  UnprocessableEntity: () => UnprocessableEntity,
-  UnsupportedMediaType: () => UnsupportedMediaType,
-  UpgradeRequired: () => UpgradeRequired,
-  UseProxy: () => UseProxy,
-  VariantAlsoNegotiates: () => VariantAlsoNegotiates,
-  default: () => src_default,
-  expressRethrow: () => expressRethrow
-});
-module.exports = __toCommonJS(src_exports);
-
 // src/express-thrower.ts
-var import_statuses = __toESM(require("statuses"), 1);
+import statuses from "statuses";
 function sendOptions(res, options) {
   if (options.filename) {
     res.setHeader(
@@ -118,7 +17,7 @@ var ExpressThrower = class extends Error {
   callback;
   constructor(status, ...[message, optionsOrCallback, callback]) {
     if (message === void 0) {
-      super((0, import_statuses.default)(status));
+      super(statuses(status));
     } else if (typeof message === "string") {
       super(message);
     } else {
@@ -475,8 +374,7 @@ function expressRethrow(e) {
 
 // src/index.ts
 var src_default = expressThrow;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
   Accepted,
   AlreadyReported,
   BadGateway,
@@ -541,6 +439,7 @@ var src_default = expressThrow;
   UpgradeRequired,
   UseProxy,
   VariantAlsoNegotiates,
+  src_default as default,
   expressRethrow
-});
-//# sourceMappingURL=index.cjs.map
+};
+//# sourceMappingURL=index.mjs.map

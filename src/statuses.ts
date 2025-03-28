@@ -3,8 +3,8 @@ import type {
 	ParamsCallback,
 	ParamsOptions,
 	ParamsOptionsCallback,
-} from './types.js'
-import ExpressThrower from './express-thrower.js'
+} from './types'
+import ExpressThrower from './express-thrower'
 
 export class Continue extends ExpressThrower {
 	constructor(...params: ParamsOptions)
