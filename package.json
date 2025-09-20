@@ -12,11 +12,14 @@
 	"scripts": {
 		"dev": "tsup --watch",
 		"build-raw": "tsup",
-		"lint": "eslint . --ext .ts",
-		"format": "prettier --write .",
+		"check": "biome check .",
+		"fix": "biome check --fix .",
+		"full-check": "pnpm ts && pnpm check",
+		"format": "biome format --write .",
 		"generate": "tsx scripts/generate-statuses.ts",
-		"build": "pnpm generate && pnpm format && pnpm lint && pnpm build-raw",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build": "pnpm generate && pnpm format && pnpm check && pnpm build-raw",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"ts": "tsc --noEmit"
 	},
 	"keywords": [],
 	"author": "",
@@ -28,27 +31,15 @@
 		"express": "^4.0.0 || ^5.0.0"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "^2.2.4",
 		"@ianvs/prettier-plugin-sort-imports": "^4.3.1",
 		"@types/express": "^4.17.21",
 		"@types/lodash": "^4.17.7",
 		"@types/node": "^22.5.4",
 		"@types/statuses": "^2.0.5",
-		"@typescript-eslint/eslint-plugin": "^8.4.0",
-		"@typescript-eslint/parser": "^8.4.0",
-		"eslint": "^8.57.0",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-import": "^2.30.0",
-		"prettier": "^3.3.3",
 		"tsup": "^8.2.4",
 		"tsx": "^4.19.0",
 		"typescript": "^5.5.4"
 	},
-	"pnpm": {
-		"ignoredBuiltDependencies": [
-			"esbuild"
-		],
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
-	}
+	"packageManager": "pnpm@10.15.1+sha512.34e538c329b5553014ca8e8f4535997f96180a1d0f614339357449935350d924e22f8614682191264ec33d1462ac21561aff97f6bb18065351c162c7e8f6de67"
 }

@@ -44,9 +44,7 @@ export class ExpressThrower extends Error {
 			this.json = message
 		}
 		this.callback =
-			typeof optionsOrCallback === 'function'
-				? optionsOrCallback
-				: callback
+			typeof optionsOrCallback === 'function' ? optionsOrCallback : callback
 		this.options =
 			typeof optionsOrCallback === 'object' ? optionsOrCallback : {}
 		this.status = status
@@ -61,8 +59,7 @@ export class ExpressThrower extends Error {
 		this.callback?.(req, res)
 		if (res.closed) return res
 		sendOptions(res, this.options)
-		if (this.options.redirect)
-			return res.redirect(this.status, this.message)
+		if (this.options.redirect) return res.redirect(this.status, this.message)
 		return res.status(this.status).send(this.json ?? this.message)
 	}
 
