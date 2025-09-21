@@ -1,10 +1,22 @@
 {
 	"name": "express-throw",
-	"version": "1.0.2",
-	"description": "",
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
+	"version": "1.0.3",
+	"description": "A library for throwing HTTP responses as errors in Express.js applications.",
+	"author": "Román Via-Dufresne Saus <roman910dev@gmail.com>(https://github.com/roman910dev)",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/roman910dev/express-throw.git"
+	},
+	"keywords": [
+		"express",
+		"http",
+		"error",
+		"typescript",
+		"middleware",
+		"status-codes",
+		"error-handling"
+	],
 	"type": "module",
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
@@ -29,7 +41,8 @@
 		"generate": "tsx scripts/generate-statuses.ts",
 		"build": "pnpm generate && pnpm format && pnpm check && pnpm build-raw",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"ts": "tsc --noEmit"
+		"ts": "tsc --noEmit",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"statuses": "^2.0.1"
@@ -42,6 +55,8 @@
 		"@types/express": "^4.17.21",
 		"@types/node": "^22.5.4",
 		"@types/statuses": "^2.0.5",
+		"husky": "^9.1.7",
+		"prettier": "^3.6.2",
 		"tsx": "^4.20.5",
 		"typescript": "^5.9.2"
 	},
