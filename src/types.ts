@@ -1,35 +1,48 @@
 import type { Request, Response } from 'express'
 
-export interface Options {
+/**
+ * Options for customizing ExpressThrower responses.
+ */
+export interface ExpressThrowerOptions {
+	/** Set Content-Disposition header for file downloads */
 	filename?: string
+	/** Use res.redirect() instead of res.send() */
 	redirect?: boolean
+	/** Custom headers to set on the response */
 	headers?: Record<string, string>
 }
 
+/**
+ * Callback function that executes before sending the response.
+ */
 export type Callback = (
 	req: Request | undefined,
 	res: Response,
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: give more flexibility
 ) => any
 
 export type ParamsFull = [
 	message?: string | object,
-	optionsOrCallback?: Options | Callback | undefined,
+	optionsOrCallback?: ExpressThrowerOptions | Callback | undefined,
 	callback?: Callback | undefined,
 ]
+
 export type ParamsOptions = [
 	message?: string | object,
-	options?: Options | undefined,
+	options?: ExpressThrowerOptions | undefined,
 ]
+
 export type ParamsCallback = [
 	message?: string | object,
 	callback?: Callback | undefined,
 ]
+
 export type ParamsOptionsCallback = [
 	message?: string | object,
-	options?: Options | undefined,
+	options?: ExpressThrowerOptions | undefined,
 	callback?: Callback | undefined,
 ]
+
 export type ExpressThrowerParams =
 	| ParamsOptions
 	| ParamsCallback

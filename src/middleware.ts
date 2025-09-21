@@ -1,13 +1,18 @@
 import type { NextFunction, Request, Response } from 'express'
 
-import ExpressThrower from './express-thrower'
+import ExpressThrower from './express-thrower.js'
 
+/**
+ * Express error handling middleware for express-throw.
+ * Catches `ExpressThrower` errors and sends the appropriate HTTP response.
+ * Other errors are passed to the next error handler.
+ */
 export default function expressThrow(
 	err: Error,
 	req: Request,
 	res: Response,
 	next: NextFunction,
-) {
-	if (err instanceof ExpressThrower) return err.send(req, res)
-	next(err)
+): void {
+	if (err instanceof ExpressThrower) err.send(req, res)
+	else next(err)
 }

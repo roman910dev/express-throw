@@ -1,5 +1,4 @@
-import ExpressThrower from './express-thrower.js'
-
+import ExpressThrower from './express-thrower.js';
 /**
  * Re-throws ExpressThrower errors while letting other errors pass through.
  * This is useful when you want to catch and handle other types of errors
@@ -11,6 +10,8 @@ import ExpressThrower from './express-thrower.js'
  * else throw err
  * ```
  */
-export function expressRethrow(err: unknown): void {
-	if (err instanceof ExpressThrower) throw err
+export function expressRethrow(err) {
+    if (err instanceof ExpressThrower)
+        throw err;
 }
+//# sourceMappingURL=utils.js.map

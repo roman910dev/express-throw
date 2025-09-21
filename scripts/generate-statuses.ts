@@ -1,5 +1,5 @@
-import { writeFileSync } from 'fs'
-import path from 'path'
+import { writeFileSync } from 'node:fs'
+import path from 'node:path'
 
 import status from 'statuses'
 
@@ -7,17 +7,23 @@ const pascalCase = (msg: string) => msg.replaceAll(/\W/g, '')
 
 function generateStatusesTS() {
 	const code =
-		`import type {
+		/*ts*/ `
+import ExpressThrower from './express-thrower.js'
+import type {
 	ExpressThrowerParams,
 	ParamsCallback,
 	ParamsOptions,
 	ParamsOptionsCallback,
-} from './types'
-import ExpressThrower from './express-thrower'
+} from './types.js'
 ` +
 		status.codes
 			.map(
-				(sc) => `
+				(sc) => /*ts*/ `
+/**
+ * HTTP ${sc} ${status(sc)} status code.${status.redirect[sc] ? '\n *\n * Redirects by default.' : ''}
+ * 
+ * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/${sc}).
+ */
 export class ${pascalCase(status(sc))} extends ExpressThrower {
 	constructor(...params: ParamsOptions)
 	constructor(...params: ParamsCallback)
@@ -29,7 +35,7 @@ export class ${pascalCase(status(sc))} extends ExpressThrower {
 			)
 			.join('\n')
 
-	writeFileSync(path.join(__dirname, '../src/statuses.ts'), code)
+	writeFileSync(path.join(import.meta.dirname, '../src/statuses.ts'), code)
 }
 
 function generateStatusTypeTS() {
@@ -38,7 +44,7 @@ function generateStatusTypeTS() {
 		...status.codes.map((sc) => `	| ${sc}`),
 		'',
 	].join('\n')
-	writeFileSync(path.join(__dirname, '../src/status-type.ts'), code)
+	writeFileSync(path.join(import.meta.dirname, '../src/status-type.ts'), code)
 }
 
 function main() {

@@ -1,0 +1,23 @@
+echo "CI_WIP: $CI_WIP"
+
+if [ "$CI_WIP" = "true" ]; then
+  exit 0
+fi
+
+# Stash unstaged changes (keep index)
+git stash --keep-index --quiet --include-untracked
+STASHED=$?
+
+# Function to restore stash and exit with status
+restore_and_exit() {
+  if [ $STASHED -eq 0 ]; then
+    echo "🔁 Restoring unstaged changes..."
+    git stash pop --quiet || true
+  fi
+  exit $1
+}
+
+echo "🏗️  Building project..."
+pnpm build || restore_and_exit $?
+
+restore_and_exit 0
