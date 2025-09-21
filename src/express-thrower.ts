@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'
 import statuses from 'statuses'
 
-import type { StatusCode as SC } from './status-type'
+import type { StatusCode as SC } from './status-type.js'
 import type {
 	Callback,
 	Options,
@@ -9,7 +9,7 @@ import type {
 	ParamsFull,
 	ParamsOptions,
 	ParamsOptionsCallback,
-} from './types'
+} from './types.js'
 
 function sendOptions(res: Response, options: Options) {
 	if (options.filename) {
@@ -63,7 +63,7 @@ export class ExpressThrower extends Error {
 		return res.status(this.status).send(this.json ?? this.message)
 	}
 
-	sendStatus(res: Response) {
+	sendStatus(res: Response): Response {
 		return res.sendStatus(this.status)
 	}
 }

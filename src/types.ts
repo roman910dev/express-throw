@@ -9,7 +9,7 @@ export interface Options {
 export type Callback = (
 	req: Request | undefined,
 	res: Response,
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: give more flexibility
 ) => any
 
 export type ParamsFull = [
