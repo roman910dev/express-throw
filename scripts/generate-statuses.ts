@@ -19,6 +19,11 @@ import type {
 		status.codes
 			.map(
 				(sc) => /*ts*/ `
+/**
+ * HTTP ${sc} ${status(sc)} status code.
+ * 
+ * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/${sc}).
+ */
 export class ${pascalCase(status(sc))} extends ExpressThrower {
 	constructor(...params: ParamsOptions)
 	constructor(...params: ParamsCallback)

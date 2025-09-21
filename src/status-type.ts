@@ -1,4 +1,4 @@
-export type StatusCode =
+export type StatusCode = 
 	| 100
 	| 101
 	| 102
