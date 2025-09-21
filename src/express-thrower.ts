@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import statuses from 'statuses'
+import statuses, { redirect } from 'statuses'
 
 import type { StatusCode as SC } from './status-type.js'
 import type {
@@ -65,8 +65,9 @@ export class ExpressThrower extends Error {
 		}
 		this.callback =
 			typeof optionsOrCallback === 'function' ? optionsOrCallback : callback
-		this.options =
+		const options =
 			typeof optionsOrCallback === 'object' ? optionsOrCallback : {}
+		this.options = { redirect: redirect[status], ...options }
 		this.status = status
 	}
 

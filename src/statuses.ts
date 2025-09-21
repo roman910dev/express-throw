@@ -1,4 +1,3 @@
-
 import ExpressThrower from './express-thrower.js'
 import type {
 	ExpressThrowerParams,
@@ -9,7 +8,7 @@ import type {
 
 /**
  * HTTP 100 Continue status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/100).
  */
 export class Continue extends ExpressThrower {
@@ -23,7 +22,7 @@ export class Continue extends ExpressThrower {
 
 /**
  * HTTP 101 Switching Protocols status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/101).
  */
 export class SwitchingProtocols extends ExpressThrower {
@@ -37,7 +36,7 @@ export class SwitchingProtocols extends ExpressThrower {
 
 /**
  * HTTP 102 Processing status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/102).
  */
 export class Processing extends ExpressThrower {
@@ -51,7 +50,7 @@ export class Processing extends ExpressThrower {
 
 /**
  * HTTP 103 Early Hints status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/103).
  */
 export class EarlyHints extends ExpressThrower {
@@ -65,7 +64,7 @@ export class EarlyHints extends ExpressThrower {
 
 /**
  * HTTP 200 OK status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200).
  */
 export class OK extends ExpressThrower {
@@ -79,7 +78,7 @@ export class OK extends ExpressThrower {
 
 /**
  * HTTP 201 Created status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/201).
  */
 export class Created extends ExpressThrower {
@@ -93,7 +92,7 @@ export class Created extends ExpressThrower {
 
 /**
  * HTTP 202 Accepted status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/202).
  */
 export class Accepted extends ExpressThrower {
@@ -107,7 +106,7 @@ export class Accepted extends ExpressThrower {
 
 /**
  * HTTP 203 Non-Authoritative Information status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/203).
  */
 export class NonAuthoritativeInformation extends ExpressThrower {
@@ -121,7 +120,7 @@ export class NonAuthoritativeInformation extends ExpressThrower {
 
 /**
  * HTTP 204 No Content status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/204).
  */
 export class NoContent extends ExpressThrower {
@@ -135,7 +134,7 @@ export class NoContent extends ExpressThrower {
 
 /**
  * HTTP 205 Reset Content status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/205).
  */
 export class ResetContent extends ExpressThrower {
@@ -149,7 +148,7 @@ export class ResetContent extends ExpressThrower {
 
 /**
  * HTTP 206 Partial Content status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/206).
  */
 export class PartialContent extends ExpressThrower {
@@ -163,7 +162,7 @@ export class PartialContent extends ExpressThrower {
 
 /**
  * HTTP 207 Multi-Status status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/207).
  */
 export class MultiStatus extends ExpressThrower {
@@ -177,7 +176,7 @@ export class MultiStatus extends ExpressThrower {
 
 /**
  * HTTP 208 Already Reported status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/208).
  */
 export class AlreadyReported extends ExpressThrower {
@@ -191,7 +190,7 @@ export class AlreadyReported extends ExpressThrower {
 
 /**
  * HTTP 226 IM Used status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/226).
  */
 export class IMUsed extends ExpressThrower {
@@ -205,7 +204,9 @@ export class IMUsed extends ExpressThrower {
 
 /**
  * HTTP 300 Multiple Choices status code.
- * 
+ *
+ * Redirects by default.
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/300).
  */
 export class MultipleChoices extends ExpressThrower {
@@ -219,7 +220,9 @@ export class MultipleChoices extends ExpressThrower {
 
 /**
  * HTTP 301 Moved Permanently status code.
- * 
+ *
+ * Redirects by default.
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/301).
  */
 export class MovedPermanently extends ExpressThrower {
@@ -233,7 +236,9 @@ export class MovedPermanently extends ExpressThrower {
 
 /**
  * HTTP 302 Found status code.
- * 
+ *
+ * Redirects by default.
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/302).
  */
 export class Found extends ExpressThrower {
@@ -247,7 +252,9 @@ export class Found extends ExpressThrower {
 
 /**
  * HTTP 303 See Other status code.
- * 
+ *
+ * Redirects by default.
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/303).
  */
 export class SeeOther extends ExpressThrower {
@@ -261,7 +268,7 @@ export class SeeOther extends ExpressThrower {
 
 /**
  * HTTP 304 Not Modified status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/304).
  */
 export class NotModified extends ExpressThrower {
@@ -275,7 +282,9 @@ export class NotModified extends ExpressThrower {
 
 /**
  * HTTP 305 Use Proxy status code.
- * 
+ *
+ * Redirects by default.
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/305).
  */
 export class UseProxy extends ExpressThrower {
@@ -289,7 +298,9 @@ export class UseProxy extends ExpressThrower {
 
 /**
  * HTTP 307 Temporary Redirect status code.
- * 
+ *
+ * Redirects by default.
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/307).
  */
 export class TemporaryRedirect extends ExpressThrower {
@@ -303,7 +314,9 @@ export class TemporaryRedirect extends ExpressThrower {
 
 /**
  * HTTP 308 Permanent Redirect status code.
- * 
+ *
+ * Redirects by default.
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/308).
  */
 export class PermanentRedirect extends ExpressThrower {
@@ -317,7 +330,7 @@ export class PermanentRedirect extends ExpressThrower {
 
 /**
  * HTTP 400 Bad Request status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400).
  */
 export class BadRequest extends ExpressThrower {
@@ -331,7 +344,7 @@ export class BadRequest extends ExpressThrower {
 
 /**
  * HTTP 401 Unauthorized status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/401).
  */
 export class Unauthorized extends ExpressThrower {
@@ -345,7 +358,7 @@ export class Unauthorized extends ExpressThrower {
 
 /**
  * HTTP 402 Payment Required status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/402).
  */
 export class PaymentRequired extends ExpressThrower {
@@ -359,7 +372,7 @@ export class PaymentRequired extends ExpressThrower {
 
 /**
  * HTTP 403 Forbidden status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/403).
  */
 export class Forbidden extends ExpressThrower {
@@ -373,7 +386,7 @@ export class Forbidden extends ExpressThrower {
 
 /**
  * HTTP 404 Not Found status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/404).
  */
 export class NotFound extends ExpressThrower {
@@ -387,7 +400,7 @@ export class NotFound extends ExpressThrower {
 
 /**
  * HTTP 405 Method Not Allowed status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/405).
  */
 export class MethodNotAllowed extends ExpressThrower {
@@ -401,7 +414,7 @@ export class MethodNotAllowed extends ExpressThrower {
 
 /**
  * HTTP 406 Not Acceptable status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/406).
  */
 export class NotAcceptable extends ExpressThrower {
@@ -415,7 +428,7 @@ export class NotAcceptable extends ExpressThrower {
 
 /**
  * HTTP 407 Proxy Authentication Required status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/407).
  */
 export class ProxyAuthenticationRequired extends ExpressThrower {
@@ -429,7 +442,7 @@ export class ProxyAuthenticationRequired extends ExpressThrower {
 
 /**
  * HTTP 408 Request Timeout status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/408).
  */
 export class RequestTimeout extends ExpressThrower {
@@ -443,7 +456,7 @@ export class RequestTimeout extends ExpressThrower {
 
 /**
  * HTTP 409 Conflict status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/409).
  */
 export class Conflict extends ExpressThrower {
@@ -457,7 +470,7 @@ export class Conflict extends ExpressThrower {
 
 /**
  * HTTP 410 Gone status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/410).
  */
 export class Gone extends ExpressThrower {
@@ -471,7 +484,7 @@ export class Gone extends ExpressThrower {
 
 /**
  * HTTP 411 Length Required status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/411).
  */
 export class LengthRequired extends ExpressThrower {
@@ -485,7 +498,7 @@ export class LengthRequired extends ExpressThrower {
 
 /**
  * HTTP 412 Precondition Failed status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/412).
  */
 export class PreconditionFailed extends ExpressThrower {
@@ -499,7 +512,7 @@ export class PreconditionFailed extends ExpressThrower {
 
 /**
  * HTTP 413 Payload Too Large status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/413).
  */
 export class PayloadTooLarge extends ExpressThrower {
@@ -513,7 +526,7 @@ export class PayloadTooLarge extends ExpressThrower {
 
 /**
  * HTTP 414 URI Too Long status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/414).
  */
 export class URITooLong extends ExpressThrower {
@@ -527,7 +540,7 @@ export class URITooLong extends ExpressThrower {
 
 /**
  * HTTP 415 Unsupported Media Type status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/415).
  */
 export class UnsupportedMediaType extends ExpressThrower {
@@ -541,7 +554,7 @@ export class UnsupportedMediaType extends ExpressThrower {
 
 /**
  * HTTP 416 Range Not Satisfiable status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/416).
  */
 export class RangeNotSatisfiable extends ExpressThrower {
@@ -555,7 +568,7 @@ export class RangeNotSatisfiable extends ExpressThrower {
 
 /**
  * HTTP 417 Expectation Failed status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/417).
  */
 export class ExpectationFailed extends ExpressThrower {
@@ -569,7 +582,7 @@ export class ExpectationFailed extends ExpressThrower {
 
 /**
  * HTTP 418 I'm a Teapot status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/418).
  */
 export class ImaTeapot extends ExpressThrower {
@@ -583,7 +596,7 @@ export class ImaTeapot extends ExpressThrower {
 
 /**
  * HTTP 421 Misdirected Request status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/421).
  */
 export class MisdirectedRequest extends ExpressThrower {
@@ -597,7 +610,7 @@ export class MisdirectedRequest extends ExpressThrower {
 
 /**
  * HTTP 422 Unprocessable Entity status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/422).
  */
 export class UnprocessableEntity extends ExpressThrower {
@@ -611,7 +624,7 @@ export class UnprocessableEntity extends ExpressThrower {
 
 /**
  * HTTP 423 Locked status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/423).
  */
 export class Locked extends ExpressThrower {
@@ -625,7 +638,7 @@ export class Locked extends ExpressThrower {
 
 /**
  * HTTP 424 Failed Dependency status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/424).
  */
 export class FailedDependency extends ExpressThrower {
@@ -639,7 +652,7 @@ export class FailedDependency extends ExpressThrower {
 
 /**
  * HTTP 425 Too Early status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/425).
  */
 export class TooEarly extends ExpressThrower {
@@ -653,7 +666,7 @@ export class TooEarly extends ExpressThrower {
 
 /**
  * HTTP 426 Upgrade Required status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/426).
  */
 export class UpgradeRequired extends ExpressThrower {
@@ -667,7 +680,7 @@ export class UpgradeRequired extends ExpressThrower {
 
 /**
  * HTTP 428 Precondition Required status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/428).
  */
 export class PreconditionRequired extends ExpressThrower {
@@ -681,7 +694,7 @@ export class PreconditionRequired extends ExpressThrower {
 
 /**
  * HTTP 429 Too Many Requests status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429).
  */
 export class TooManyRequests extends ExpressThrower {
@@ -695,7 +708,7 @@ export class TooManyRequests extends ExpressThrower {
 
 /**
  * HTTP 431 Request Header Fields Too Large status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/431).
  */
 export class RequestHeaderFieldsTooLarge extends ExpressThrower {
@@ -709,7 +722,7 @@ export class RequestHeaderFieldsTooLarge extends ExpressThrower {
 
 /**
  * HTTP 451 Unavailable For Legal Reasons status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/451).
  */
 export class UnavailableForLegalReasons extends ExpressThrower {
@@ -723,7 +736,7 @@ export class UnavailableForLegalReasons extends ExpressThrower {
 
 /**
  * HTTP 500 Internal Server Error status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/500).
  */
 export class InternalServerError extends ExpressThrower {
@@ -737,7 +750,7 @@ export class InternalServerError extends ExpressThrower {
 
 /**
  * HTTP 501 Not Implemented status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/501).
  */
 export class NotImplemented extends ExpressThrower {
@@ -751,7 +764,7 @@ export class NotImplemented extends ExpressThrower {
 
 /**
  * HTTP 502 Bad Gateway status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/502).
  */
 export class BadGateway extends ExpressThrower {
@@ -765,7 +778,7 @@ export class BadGateway extends ExpressThrower {
 
 /**
  * HTTP 503 Service Unavailable status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/503).
  */
 export class ServiceUnavailable extends ExpressThrower {
@@ -779,7 +792,7 @@ export class ServiceUnavailable extends ExpressThrower {
 
 /**
  * HTTP 504 Gateway Timeout status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/504).
  */
 export class GatewayTimeout extends ExpressThrower {
@@ -793,7 +806,7 @@ export class GatewayTimeout extends ExpressThrower {
 
 /**
  * HTTP 505 HTTP Version Not Supported status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/505).
  */
 export class HTTPVersionNotSupported extends ExpressThrower {
@@ -807,7 +820,7 @@ export class HTTPVersionNotSupported extends ExpressThrower {
 
 /**
  * HTTP 506 Variant Also Negotiates status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/506).
  */
 export class VariantAlsoNegotiates extends ExpressThrower {
@@ -821,7 +834,7 @@ export class VariantAlsoNegotiates extends ExpressThrower {
 
 /**
  * HTTP 507 Insufficient Storage status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/507).
  */
 export class InsufficientStorage extends ExpressThrower {
@@ -835,7 +848,7 @@ export class InsufficientStorage extends ExpressThrower {
 
 /**
  * HTTP 508 Loop Detected status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/508).
  */
 export class LoopDetected extends ExpressThrower {
@@ -849,7 +862,7 @@ export class LoopDetected extends ExpressThrower {
 
 /**
  * HTTP 509 Bandwidth Limit Exceeded status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/509).
  */
 export class BandwidthLimitExceeded extends ExpressThrower {
@@ -863,7 +876,7 @@ export class BandwidthLimitExceeded extends ExpressThrower {
 
 /**
  * HTTP 510 Not Extended status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/510).
  */
 export class NotExtended extends ExpressThrower {
@@ -877,7 +890,7 @@ export class NotExtended extends ExpressThrower {
 
 /**
  * HTTP 511 Network Authentication Required status code.
- * 
+ *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/511).
  */
 export class NetworkAuthenticationRequired extends ExpressThrower {

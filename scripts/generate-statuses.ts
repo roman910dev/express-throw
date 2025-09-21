@@ -20,7 +20,7 @@ import type {
 			.map(
 				(sc) => /*ts*/ `
 /**
- * HTTP ${sc} ${status(sc)} status code.
+ * HTTP ${sc} ${status(sc)} status code.${status.redirect[sc] ? '\n *\n * Redirects by default.' : ''}
  * 
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/${sc}).
  */
