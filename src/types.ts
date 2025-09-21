@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
 
-export interface Options {
+export interface ExpressThrowerOptions {
 	filename?: string
 	redirect?: boolean
 	headers?: Record<string, string>
@@ -14,12 +14,12 @@ export type Callback = (
 
 export type ParamsFull = [
 	message?: string | object,
-	optionsOrCallback?: Options | Callback | undefined,
+	optionsOrCallback?: ExpressThrowerOptions | Callback | undefined,
 	callback?: Callback | undefined,
 ]
 export type ParamsOptions = [
 	message?: string | object,
-	options?: Options | undefined,
+	options?: ExpressThrowerOptions | undefined,
 ]
 export type ParamsCallback = [
 	message?: string | object,
@@ -27,7 +27,7 @@ export type ParamsCallback = [
 ]
 export type ParamsOptionsCallback = [
 	message?: string | object,
-	options?: Options | undefined,
+	options?: ExpressThrowerOptions | undefined,
 	callback?: Callback | undefined,
 ]
 export type ExpressThrowerParams =

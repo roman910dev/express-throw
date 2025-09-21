@@ -4,14 +4,14 @@ import statuses from 'statuses'
 import type { StatusCode as SC } from './status-type.js'
 import type {
 	Callback,
-	Options,
+	ExpressThrowerOptions,
 	ParamsCallback,
 	ParamsFull,
 	ParamsOptions,
 	ParamsOptionsCallback,
 } from './types.js'
 
-function sendOptions(res: Response, options: Options) {
+function sendOptions(res: Response, options: ExpressThrowerOptions) {
 	if (options.filename) {
 		res.setHeader(
 			'Content-Disposition',
@@ -25,7 +25,7 @@ function sendOptions(res: Response, options: Options) {
 export class ExpressThrower extends Error {
 	status: SC
 	json: object | undefined
-	options: Options
+	options: ExpressThrowerOptions
 	callback: Callback | undefined
 
 	constructor(status: SC, ...params: ParamsOptions)
