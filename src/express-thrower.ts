@@ -33,13 +33,13 @@ function sendOptions(res: Response, options: ExpressThrowerOptions) {
  */
 export class ExpressThrower extends Error {
 	/** The HTTP status code for this error */
-	status: SC
+	readonly status: SC
 	/** The JSON object to send as response body (if message was an object) */
-	json: object | undefined
+	readonly json: object | undefined
 	/** Options for customizing the response */
-	options: ExpressThrowerOptions
+	readonly options: ExpressThrowerOptions
 	/** Callback function to execute before sending the response */
-	callback: Callback | undefined
+	readonly callback: Callback | undefined
 
 	/**
 	 * Creates a new ExpressThrower instance.
