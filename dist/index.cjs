@@ -1,4 +1,12 @@
-import statuses, { redirect } from 'statuses';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var statuses = require('statuses');
+
+function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+var statuses__default = /*#__PURE__*/_interopDefault(statuses);
 
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
@@ -27,7 +35,7 @@ var ExpressThrower = class extends Error {
   callback;
   constructor(status, ...[message, optionsOrCallback, callback]) {
     if (message === void 0) {
-      super(statuses(status));
+      super(statuses__default.default(status));
     } else if (typeof message === "string") {
       super(message);
     } else {
@@ -36,7 +44,7 @@ var ExpressThrower = class extends Error {
     }
     this.callback = typeof optionsOrCallback === "function" ? optionsOrCallback : callback;
     const options = typeof optionsOrCallback === "object" ? optionsOrCallback : {};
-    this.options = { redirect: redirect[status], ...options };
+    this.options = { redirect: statuses.redirect[status], ...options };
     this.status = status;
   }
   send(reqOrRes, response) {
@@ -581,6 +589,71 @@ __name(expressRethrow, "expressRethrow");
 // src/index.ts
 var index_default = expressThrow;
 
-export { Accepted, AlreadyReported, BadGateway, BadRequest, BandwidthLimitExceeded, Conflict, Continue, Created, EarlyHints, ExpectationFailed, ExpressThrower, FailedDependency, Forbidden, Found, GatewayTimeout, Gone, HTTPVersionNotSupported, IMUsed, ImaTeapot, InsufficientStorage, InternalServerError, LengthRequired, Locked, LoopDetected, MethodNotAllowed, MisdirectedRequest, MovedPermanently, MultiStatus, MultipleChoices, NetworkAuthenticationRequired, NoContent, NonAuthoritativeInformation, NotAcceptable, NotExtended, NotFound, NotImplemented, NotModified, OK, PartialContent, PayloadTooLarge, PaymentRequired, PermanentRedirect, PreconditionFailed, PreconditionRequired, Processing, ProxyAuthenticationRequired, RangeNotSatisfiable, RequestHeaderFieldsTooLarge, RequestTimeout, ResetContent, SeeOther, ServiceUnavailable, SwitchingProtocols, TemporaryRedirect, TooEarly, TooManyRequests, URITooLong, Unauthorized, UnavailableForLegalReasons, UnprocessableEntity, UnsupportedMediaType, UpgradeRequired, UseProxy, VariantAlsoNegotiates, index_default as default, expressRethrow };
-//# sourceMappingURL=index.js.map
-//# sourceMappingURL=index.js.map
+exports.Accepted = Accepted;
+exports.AlreadyReported = AlreadyReported;
+exports.BadGateway = BadGateway;
+exports.BadRequest = BadRequest;
+exports.BandwidthLimitExceeded = BandwidthLimitExceeded;
+exports.Conflict = Conflict;
+exports.Continue = Continue;
+exports.Created = Created;
+exports.EarlyHints = EarlyHints;
+exports.ExpectationFailed = ExpectationFailed;
+exports.ExpressThrower = ExpressThrower;
+exports.FailedDependency = FailedDependency;
+exports.Forbidden = Forbidden;
+exports.Found = Found;
+exports.GatewayTimeout = GatewayTimeout;
+exports.Gone = Gone;
+exports.HTTPVersionNotSupported = HTTPVersionNotSupported;
+exports.IMUsed = IMUsed;
+exports.ImaTeapot = ImaTeapot;
+exports.InsufficientStorage = InsufficientStorage;
+exports.InternalServerError = InternalServerError;
+exports.LengthRequired = LengthRequired;
+exports.Locked = Locked;
+exports.LoopDetected = LoopDetected;
+exports.MethodNotAllowed = MethodNotAllowed;
+exports.MisdirectedRequest = MisdirectedRequest;
+exports.MovedPermanently = MovedPermanently;
+exports.MultiStatus = MultiStatus;
+exports.MultipleChoices = MultipleChoices;
+exports.NetworkAuthenticationRequired = NetworkAuthenticationRequired;
+exports.NoContent = NoContent;
+exports.NonAuthoritativeInformation = NonAuthoritativeInformation;
+exports.NotAcceptable = NotAcceptable;
+exports.NotExtended = NotExtended;
+exports.NotFound = NotFound;
+exports.NotImplemented = NotImplemented;
+exports.NotModified = NotModified;
+exports.OK = OK;
+exports.PartialContent = PartialContent;
+exports.PayloadTooLarge = PayloadTooLarge;
+exports.PaymentRequired = PaymentRequired;
+exports.PermanentRedirect = PermanentRedirect;
+exports.PreconditionFailed = PreconditionFailed;
+exports.PreconditionRequired = PreconditionRequired;
+exports.Processing = Processing;
+exports.ProxyAuthenticationRequired = ProxyAuthenticationRequired;
+exports.RangeNotSatisfiable = RangeNotSatisfiable;
+exports.RequestHeaderFieldsTooLarge = RequestHeaderFieldsTooLarge;
+exports.RequestTimeout = RequestTimeout;
+exports.ResetContent = ResetContent;
+exports.SeeOther = SeeOther;
+exports.ServiceUnavailable = ServiceUnavailable;
+exports.SwitchingProtocols = SwitchingProtocols;
+exports.TemporaryRedirect = TemporaryRedirect;
+exports.TooEarly = TooEarly;
+exports.TooManyRequests = TooManyRequests;
+exports.URITooLong = URITooLong;
+exports.Unauthorized = Unauthorized;
+exports.UnavailableForLegalReasons = UnavailableForLegalReasons;
+exports.UnprocessableEntity = UnprocessableEntity;
+exports.UnsupportedMediaType = UnsupportedMediaType;
+exports.UpgradeRequired = UpgradeRequired;
+exports.UseProxy = UseProxy;
+exports.VariantAlsoNegotiates = VariantAlsoNegotiates;
+exports.default = index_default;
+exports.expressRethrow = expressRethrow;
+//# sourceMappingURL=index.cjs.map
+//# sourceMappingURL=index.cjs.map

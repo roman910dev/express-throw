@@ -1,11 +1,87 @@
-import ExpressThrower from './express-thrower.js';
-import type { ParamsCallback, ParamsOptions, ParamsOptionsCallback } from './types.js';
+import { Request, Response, NextFunction } from 'express';
+
+/**
+ * Express error handling middleware for express-throw.
+ * Catches `ExpressThrower` errors and sends the appropriate HTTP response.
+ * Other errors are passed to the next error handler.
+ */
+declare function expressThrow(err: Error, req: Request, res: Response, next: NextFunction): void;
+
+type StatusCode = 100 | 101 | 102 | 103 | 200 | 201 | 202 | 203 | 204 | 205 | 206 | 207 | 208 | 226 | 300 | 301 | 302 | 303 | 304 | 305 | 307 | 308 | 400 | 401 | 402 | 403 | 404 | 405 | 406 | 407 | 408 | 409 | 410 | 411 | 412 | 413 | 414 | 415 | 416 | 417 | 418 | 421 | 422 | 423 | 424 | 425 | 426 | 428 | 429 | 431 | 451 | 500 | 501 | 502 | 503 | 504 | 505 | 506 | 507 | 508 | 509 | 510 | 511;
+
+/**
+ * Options for customizing ExpressThrower responses.
+ */
+interface ExpressThrowerOptions {
+    /** Set Content-Disposition header for file downloads */
+    filename?: string;
+    /** Use res.redirect() instead of res.send() */
+    redirect?: boolean;
+    /** Custom headers to set on the response */
+    headers?: Record<string, string>;
+}
+/**
+ * Callback function that executes before sending the response.
+ */
+type Callback = (req: Request | undefined, res: Response) => any;
+type ParamsOptions = [
+    message?: string | object,
+    options?: ExpressThrowerOptions | undefined
+];
+type ParamsCallback = [
+    message?: string | object,
+    callback?: Callback | undefined
+];
+type ParamsOptionsCallback = [
+    message?: string | object,
+    options?: ExpressThrowerOptions | undefined,
+    callback?: Callback | undefined
+];
+
+/**
+ * A custom Error class that represents HTTP responses that can be thrown.
+ * When thrown and caught by the `expressThrow` middleware, it will send the appropriate HTTP response.
+ */
+declare class ExpressThrower extends Error {
+    /** The HTTP status code for this error */
+    readonly status: StatusCode;
+    /** The JSON object to send as response body (if message was an object) */
+    readonly json: object | undefined;
+    /** Options for customizing the response */
+    readonly options: ExpressThrowerOptions;
+    /** Callback function to execute before sending the response */
+    readonly callback: Callback | undefined;
+    /**
+     * Creates a new ExpressThrower instance.
+     * @param status - The HTTP status code
+     * @param message - Optional message (string or object) or undefined to use default status message
+     * @param optionsOrCallback - Optional options object or callback function
+     * @param callback - Optional callback function (when optionsOrCallback is an object)
+     */
+    constructor(status: StatusCode, ...params: ParamsOptions);
+    constructor(status: StatusCode, ...params: ParamsCallback);
+    constructor(status: StatusCode, ...params: ParamsOptionsCallback);
+    /**
+     * Sends the HTTP response. This method is called by the express-throw middleware.
+     * @returns The response object
+     */
+    send(req: Request): never;
+    send(res: Response): Response;
+    send(req: Request, res: Response): Response;
+    /**
+     * Sends only the status code without a body.
+     * @param res - The Express response object
+     * @returns The response object
+     */
+    sendStatus(res: Response): Response;
+}
+
 /**
  * HTTP 100 Continue status code.
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/100).
  */
-export declare class Continue extends ExpressThrower {
+declare class Continue extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -15,7 +91,7 @@ export declare class Continue extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/101).
  */
-export declare class SwitchingProtocols extends ExpressThrower {
+declare class SwitchingProtocols extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -25,7 +101,7 @@ export declare class SwitchingProtocols extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/102).
  */
-export declare class Processing extends ExpressThrower {
+declare class Processing extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -35,7 +111,7 @@ export declare class Processing extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/103).
  */
-export declare class EarlyHints extends ExpressThrower {
+declare class EarlyHints extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -45,7 +121,7 @@ export declare class EarlyHints extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200).
  */
-export declare class OK extends ExpressThrower {
+declare class OK extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -55,7 +131,7 @@ export declare class OK extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/201).
  */
-export declare class Created extends ExpressThrower {
+declare class Created extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -65,7 +141,7 @@ export declare class Created extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/202).
  */
-export declare class Accepted extends ExpressThrower {
+declare class Accepted extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -75,7 +151,7 @@ export declare class Accepted extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/203).
  */
-export declare class NonAuthoritativeInformation extends ExpressThrower {
+declare class NonAuthoritativeInformation extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -85,7 +161,7 @@ export declare class NonAuthoritativeInformation extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/204).
  */
-export declare class NoContent extends ExpressThrower {
+declare class NoContent extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -95,7 +171,7 @@ export declare class NoContent extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/205).
  */
-export declare class ResetContent extends ExpressThrower {
+declare class ResetContent extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -105,7 +181,7 @@ export declare class ResetContent extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/206).
  */
-export declare class PartialContent extends ExpressThrower {
+declare class PartialContent extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -115,7 +191,7 @@ export declare class PartialContent extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/207).
  */
-export declare class MultiStatus extends ExpressThrower {
+declare class MultiStatus extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -125,7 +201,7 @@ export declare class MultiStatus extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/208).
  */
-export declare class AlreadyReported extends ExpressThrower {
+declare class AlreadyReported extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -135,7 +211,7 @@ export declare class AlreadyReported extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/226).
  */
-export declare class IMUsed extends ExpressThrower {
+declare class IMUsed extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -147,7 +223,7 @@ export declare class IMUsed extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/300).
  */
-export declare class MultipleChoices extends ExpressThrower {
+declare class MultipleChoices extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -159,7 +235,7 @@ export declare class MultipleChoices extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/301).
  */
-export declare class MovedPermanently extends ExpressThrower {
+declare class MovedPermanently extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -171,7 +247,7 @@ export declare class MovedPermanently extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/302).
  */
-export declare class Found extends ExpressThrower {
+declare class Found extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -183,7 +259,7 @@ export declare class Found extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/303).
  */
-export declare class SeeOther extends ExpressThrower {
+declare class SeeOther extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -193,7 +269,7 @@ export declare class SeeOther extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/304).
  */
-export declare class NotModified extends ExpressThrower {
+declare class NotModified extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -205,7 +281,7 @@ export declare class NotModified extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/305).
  */
-export declare class UseProxy extends ExpressThrower {
+declare class UseProxy extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -217,7 +293,7 @@ export declare class UseProxy extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/307).
  */
-export declare class TemporaryRedirect extends ExpressThrower {
+declare class TemporaryRedirect extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -229,7 +305,7 @@ export declare class TemporaryRedirect extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/308).
  */
-export declare class PermanentRedirect extends ExpressThrower {
+declare class PermanentRedirect extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -239,7 +315,7 @@ export declare class PermanentRedirect extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400).
  */
-export declare class BadRequest extends ExpressThrower {
+declare class BadRequest extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -249,7 +325,7 @@ export declare class BadRequest extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/401).
  */
-export declare class Unauthorized extends ExpressThrower {
+declare class Unauthorized extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -259,7 +335,7 @@ export declare class Unauthorized extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/402).
  */
-export declare class PaymentRequired extends ExpressThrower {
+declare class PaymentRequired extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -269,7 +345,7 @@ export declare class PaymentRequired extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/403).
  */
-export declare class Forbidden extends ExpressThrower {
+declare class Forbidden extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -279,7 +355,7 @@ export declare class Forbidden extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/404).
  */
-export declare class NotFound extends ExpressThrower {
+declare class NotFound extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -289,7 +365,7 @@ export declare class NotFound extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/405).
  */
-export declare class MethodNotAllowed extends ExpressThrower {
+declare class MethodNotAllowed extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -299,7 +375,7 @@ export declare class MethodNotAllowed extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/406).
  */
-export declare class NotAcceptable extends ExpressThrower {
+declare class NotAcceptable extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -309,7 +385,7 @@ export declare class NotAcceptable extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/407).
  */
-export declare class ProxyAuthenticationRequired extends ExpressThrower {
+declare class ProxyAuthenticationRequired extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -319,7 +395,7 @@ export declare class ProxyAuthenticationRequired extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/408).
  */
-export declare class RequestTimeout extends ExpressThrower {
+declare class RequestTimeout extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -329,7 +405,7 @@ export declare class RequestTimeout extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/409).
  */
-export declare class Conflict extends ExpressThrower {
+declare class Conflict extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -339,7 +415,7 @@ export declare class Conflict extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/410).
  */
-export declare class Gone extends ExpressThrower {
+declare class Gone extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -349,7 +425,7 @@ export declare class Gone extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/411).
  */
-export declare class LengthRequired extends ExpressThrower {
+declare class LengthRequired extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -359,7 +435,7 @@ export declare class LengthRequired extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/412).
  */
-export declare class PreconditionFailed extends ExpressThrower {
+declare class PreconditionFailed extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -369,7 +445,7 @@ export declare class PreconditionFailed extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/413).
  */
-export declare class PayloadTooLarge extends ExpressThrower {
+declare class PayloadTooLarge extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -379,7 +455,7 @@ export declare class PayloadTooLarge extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/414).
  */
-export declare class URITooLong extends ExpressThrower {
+declare class URITooLong extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -389,7 +465,7 @@ export declare class URITooLong extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/415).
  */
-export declare class UnsupportedMediaType extends ExpressThrower {
+declare class UnsupportedMediaType extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -399,7 +475,7 @@ export declare class UnsupportedMediaType extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/416).
  */
-export declare class RangeNotSatisfiable extends ExpressThrower {
+declare class RangeNotSatisfiable extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -409,7 +485,7 @@ export declare class RangeNotSatisfiable extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/417).
  */
-export declare class ExpectationFailed extends ExpressThrower {
+declare class ExpectationFailed extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -419,7 +495,7 @@ export declare class ExpectationFailed extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/418).
  */
-export declare class ImaTeapot extends ExpressThrower {
+declare class ImaTeapot extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -429,7 +505,7 @@ export declare class ImaTeapot extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/421).
  */
-export declare class MisdirectedRequest extends ExpressThrower {
+declare class MisdirectedRequest extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -439,7 +515,7 @@ export declare class MisdirectedRequest extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/422).
  */
-export declare class UnprocessableEntity extends ExpressThrower {
+declare class UnprocessableEntity extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -449,7 +525,7 @@ export declare class UnprocessableEntity extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/423).
  */
-export declare class Locked extends ExpressThrower {
+declare class Locked extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -459,7 +535,7 @@ export declare class Locked extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/424).
  */
-export declare class FailedDependency extends ExpressThrower {
+declare class FailedDependency extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -469,7 +545,7 @@ export declare class FailedDependency extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/425).
  */
-export declare class TooEarly extends ExpressThrower {
+declare class TooEarly extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -479,7 +555,7 @@ export declare class TooEarly extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/426).
  */
-export declare class UpgradeRequired extends ExpressThrower {
+declare class UpgradeRequired extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -489,7 +565,7 @@ export declare class UpgradeRequired extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/428).
  */
-export declare class PreconditionRequired extends ExpressThrower {
+declare class PreconditionRequired extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -499,7 +575,7 @@ export declare class PreconditionRequired extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429).
  */
-export declare class TooManyRequests extends ExpressThrower {
+declare class TooManyRequests extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -509,7 +585,7 @@ export declare class TooManyRequests extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/431).
  */
-export declare class RequestHeaderFieldsTooLarge extends ExpressThrower {
+declare class RequestHeaderFieldsTooLarge extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -519,7 +595,7 @@ export declare class RequestHeaderFieldsTooLarge extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/451).
  */
-export declare class UnavailableForLegalReasons extends ExpressThrower {
+declare class UnavailableForLegalReasons extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -529,7 +605,7 @@ export declare class UnavailableForLegalReasons extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/500).
  */
-export declare class InternalServerError extends ExpressThrower {
+declare class InternalServerError extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -539,7 +615,7 @@ export declare class InternalServerError extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/501).
  */
-export declare class NotImplemented extends ExpressThrower {
+declare class NotImplemented extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -549,7 +625,7 @@ export declare class NotImplemented extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/502).
  */
-export declare class BadGateway extends ExpressThrower {
+declare class BadGateway extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -559,7 +635,7 @@ export declare class BadGateway extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/503).
  */
-export declare class ServiceUnavailable extends ExpressThrower {
+declare class ServiceUnavailable extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -569,7 +645,7 @@ export declare class ServiceUnavailable extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/504).
  */
-export declare class GatewayTimeout extends ExpressThrower {
+declare class GatewayTimeout extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -579,7 +655,7 @@ export declare class GatewayTimeout extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/505).
  */
-export declare class HTTPVersionNotSupported extends ExpressThrower {
+declare class HTTPVersionNotSupported extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -589,7 +665,7 @@ export declare class HTTPVersionNotSupported extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/506).
  */
-export declare class VariantAlsoNegotiates extends ExpressThrower {
+declare class VariantAlsoNegotiates extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -599,7 +675,7 @@ export declare class VariantAlsoNegotiates extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/507).
  */
-export declare class InsufficientStorage extends ExpressThrower {
+declare class InsufficientStorage extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -609,7 +685,7 @@ export declare class InsufficientStorage extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/508).
  */
-export declare class LoopDetected extends ExpressThrower {
+declare class LoopDetected extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -619,7 +695,7 @@ export declare class LoopDetected extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/509).
  */
-export declare class BandwidthLimitExceeded extends ExpressThrower {
+declare class BandwidthLimitExceeded extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -629,7 +705,7 @@ export declare class BandwidthLimitExceeded extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/510).
  */
-export declare class NotExtended extends ExpressThrower {
+declare class NotExtended extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
@@ -639,9 +715,23 @@ export declare class NotExtended extends ExpressThrower {
  *
  * See details in [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/511).
  */
-export declare class NetworkAuthenticationRequired extends ExpressThrower {
+declare class NetworkAuthenticationRequired extends ExpressThrower {
     constructor(...params: ParamsOptions);
     constructor(...params: ParamsCallback);
     constructor(...params: ParamsOptionsCallback);
 }
-//# sourceMappingURL=statuses.d.ts.map
+
+/**
+ * Re-throws ExpressThrower errors while letting other errors pass through.
+ * This is useful when you want to catch and handle other types of errors
+ * but ensure ExpressThrower errors are properly propagated to the middleware.
+ *
+ * Shorthand for:
+ * ```typescript
+ * if (err instanceof ExpressThrower) throw err
+ * else throw err
+ * ```
+ */
+declare function expressRethrow(err: unknown): void;
+
+export { Accepted, AlreadyReported, BadGateway, BadRequest, BandwidthLimitExceeded, Conflict, Continue, Created, EarlyHints, ExpectationFailed, ExpressThrower, type ExpressThrowerOptions, FailedDependency, Forbidden, Found, GatewayTimeout, Gone, HTTPVersionNotSupported, IMUsed, ImaTeapot, InsufficientStorage, InternalServerError, LengthRequired, Locked, LoopDetected, MethodNotAllowed, MisdirectedRequest, MovedPermanently, MultiStatus, MultipleChoices, NetworkAuthenticationRequired, NoContent, NonAuthoritativeInformation, NotAcceptable, NotExtended, NotFound, NotImplemented, NotModified, OK, PartialContent, PayloadTooLarge, PaymentRequired, PermanentRedirect, PreconditionFailed, PreconditionRequired, Processing, ProxyAuthenticationRequired, RangeNotSatisfiable, RequestHeaderFieldsTooLarge, RequestTimeout, ResetContent, SeeOther, ServiceUnavailable, type StatusCode, SwitchingProtocols, TemporaryRedirect, TooEarly, TooManyRequests, URITooLong, Unauthorized, UnavailableForLegalReasons, UnprocessableEntity, UnsupportedMediaType, UpgradeRequired, UseProxy, VariantAlsoNegotiates, expressThrow as default, expressRethrow };

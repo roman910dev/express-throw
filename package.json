@@ -1,6 +1,6 @@
 {
 	"name": "express-throw",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "A library for throwing HTTP responses as errors in Express.js applications.",
 	"author": "Román Via-Dufresne Saus <roman910dev@gmail.com>(https://github.com/roman910dev)",
 	"license": "MIT",
@@ -18,13 +18,15 @@
 		"error-handling"
 	],
 	"type": "module",
-	"main": "./dist/index.js",
+	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
+			"types": "./dist/index.d.ts",
 			"import": "./dist/index.js",
-			"types": "./dist/index.d.ts"
+			"require": "./dist/index.cjs",
+			"default": "./dist/index.js"
 		}
 	},
 	"files": [
@@ -33,7 +35,7 @@
 	"sideEffects": false,
 	"scripts": {
 		"dev": "tsc --watch -p tsconfig.build.json",
-		"build-raw": "tsc --build tsconfig.build.json",
+		"build-raw": "tsup",
 		"check": "biome check .",
 		"fix": "biome check --fix .",
 		"full-check": "pnpm ts && pnpm check",
@@ -57,6 +59,7 @@
 		"@types/statuses": "^2.0.5",
 		"husky": "^9.1.7",
 		"prettier": "^3.6.2",
+		"tsup": "^8.5.0",
 		"tsx": "^4.20.5",
 		"typescript": "^5.9.2"
 	},
