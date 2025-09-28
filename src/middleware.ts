@@ -8,7 +8,7 @@ import ExpressThrower from './express-thrower.js'
  * Other errors are passed to the next error handler.
  */
 export default function expressThrow(
-	err: Error,
+	err: unknown,
 	req: Request,
 	res: Response,
 	next: NextFunction,
